@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
+import htmlFile from "./models/fileStream";
 import dotEnv from "dotenv";
-dotEnv.config({ path: "./.env"});
+dotEnv.config({ path: "./.env" });
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -15,19 +16,19 @@ const transporter = nodemailer.createTransport({
 
 const mailOptions = {
   from: {
-    name:"Atul Thakre",
-    address: process.env.USER_NAME
+    name: "Atul Thakre",
+    address: process.env.USER_NAME,
   },
   to: ["mybgmigaming24@gmail.com"],
   subject: "Check mail",
   text: "Hello bgmi",
-  html: "<center><h1>Atul Thakre</h1><p>This is First mail</p></center>"
-}
+  html: htmlFile,
+};
 
 async function mailSned(transporter, mailOptions) {
   try {
     await transporter.sendMail(mailOptions);
-     console.log("Email is sent!")
+    console.log("Email is sent!");
   } catch (e) {
     console.log(e);
   }
