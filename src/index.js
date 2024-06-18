@@ -6,14 +6,12 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   host: "smtp.gmail.com",
   port: 587,
-  secure: false, // Use `true` for port 465, `false` for all other ports
+  secure: false,
   auth: {
     user: process.env.USER_NAME,
     pass: process.env.USER_PASS,
   },
 });
-
-console.log("User: " + process.env.USER_NAME)
 
 const mailOptions = {
   from: {
@@ -31,7 +29,7 @@ async function mailSned(transporter, mailOptions) {
     await transporter.sendMail(mailOptions);
      console.log("Email is sent!")
   } catch (e) {
-    console.log("Error " + e + " try error");
+    console.log(e);
   }
 }
 
