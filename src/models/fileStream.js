@@ -1,23 +1,28 @@
-import { error } from "console";
 import fs, { ReadStream } from "fs";
 
-const readStream = fs.createReadStream(
-  "../NodeMailer/public/index.html",
-  "utf-8"
-);
-
 let htmlFile;
+let fullContent;
+async function readFile() {
+  const readStream = fs.createReadStream(
+    "../NodeMailer/public/index.html",
+    "utf-8"
+  );
 
-readStream.on("data", (chunk) => {
-  htmlFile = chunk;
+  readStream.on("data", (chunk) => {
+    // htmlFile.push(chunk);
+  })
+
+  readStream.on("end", (chunk) => {
+    console.log("File readStream is successful");
+    htmlFile = chunk;
+  });
+
+  readStream.on("error", (error) => {
+    console.log(error);
+  });
+}
+
+readFile().then((htmlFile) => {  
+console.log(htmlFile);
 });
-
-readStream.on("end", () => {
-  console.log("File readStream is successful");
-});
-
-readStream.on("error", (error) => {
-  console.log(error);
-});
-
-export default htmlFile;
+export default htmlFile

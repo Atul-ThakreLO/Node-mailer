@@ -1,8 +1,12 @@
 import nodemailer from "nodemailer";
-import htmlFile from "./models/fileStream";
+// import htmlFile from "./models/fileStream.js";
+import fs from 'fs'
 import dotEnv from "dotenv";
 dotEnv.config({ path: "./.env" });
 
+let htmlFile= fs.readFileSync('../NodeMailer/public/index.html', 'utf-8', (err) => {
+  console.log(err);
+});
 const transporter = nodemailer.createTransport({
   service: "gmail",
   host: "smtp.gmail.com",
